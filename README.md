@@ -10,7 +10,7 @@ run using: `node main.js`
 3. Mining capabilities✅
 4. Listening for peers and adding tx's to blocks⏳
 5. Working Wallet⏳
-## Good Resource:
+## Good Resources:
 ~~~
 https://www.youtube.com/channel/UCnxrdFPXJMeHru_b4Q_vTPQ
 https://github.com/lhartikk/naivechain
