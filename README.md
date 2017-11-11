@@ -15,7 +15,7 @@ run using: `node main.js`
 https://www.youtube.com/channel/UCnxrdFPXJMeHru_b4Q_vTPQ
 ~~~
 
-## Overall Goal with this project:
+## Ultimate Goal with this project:
 ~~~
 To provide one of the lightest and most optimised blockchain's for worldwide superfast transactions
 which can compete with some of the 'crypto giants' in user adoption.
