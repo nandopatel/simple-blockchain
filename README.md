@@ -1,3 +1,8 @@
 # sapphire-token
+A little test blockchain for educational purposes written in JS
 
-run using `node main.js`
+# modules:
+- `npm install --save crypto-js`
+~~~
+
+run using: `node main.js`
