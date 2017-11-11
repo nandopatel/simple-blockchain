@@ -6,18 +6,29 @@ class Block{
         this.timestamp = timestamp;
         this.data = data;
         this.previousHash = previousHash;
-        this.hash = this.calculateHash();           //block data
+        this.hash = this.calculateHash();
+        this.nonce = 0;                 //block data
     }
 
     calculateHash(){
-        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();  //calculates hash of the block data
+        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();  //calculates hash of the block data
     }
-}
 
+    mineBlock(difficulty){
+        while(this.hash.substring(0,difficulty) !== Array(difficulty + 1).join("0")){
+            this.nonce++;                       //number used once gets incremented
+            this.hash = this.calculateHash();
+        }
+
+        console.log("Block Mined: " + this.hash);
+    }
+
+}
 
 class Blockchain{
     constructor(){
         this.chain = [this.createGenesisBlock()];
+        this.difficulty = 4             //this value is the number of 0's needed to mine a block aka sdifficulty
     }
     createGenesisBlock(){
     return new Block(0, "15/11/2017", "Genesis block", "0");    //creates genesis block (index, timestamp, somedata, prevhash) (in genesis blocks' case it just hashes some random data eg:0)
@@ -29,7 +40,8 @@ class Blockchain{
 
     addBlock(newBlock){
         newBlock.previousHash = this.getLatestBlock().hash; //gets previous block hash
-        newBlock.hash = newBlock.calculateHash();           //calculates hash of new block
+        newBlock.mineBlock(this.difficulty);
+        //newBlock.hash = newBlock.calculateHash();           //calculates hash of new block
         this.chain.push(newBlock);                          //then pushes it to the chain
     }
 
@@ -51,16 +63,27 @@ class Blockchain{
     }
 }
 
-Sapphire = new Blockchain();                                            //create BC
+Sapphire = new Blockchain();   //create BC
+
+console.log('Mining Block 1...');
 Sapphire.addBlock(new Block(1,"11/11/2017", {amount: 4}));
+console.log('valid: ' + Sapphire.isChainValid());
+
+console.log('Mining Block 2...');
 Sapphire.addBlock(new Block(2,"12/11/2017", {amount: 3}));              //adding blocks
+console.log('valid: ' + Sapphire.isChainValid());
 
-console.log('valid?: ' + Sapphire.isChainValid());                      //validity response
-console.log(JSON.stringify(Sapphire, null, 4));                         //prints block data
 
-Sapphire.chain[1].data = {amount: 100};                                 //example of an attacker trying to overwrite block data, eg: send 100
-console.log('valid?: ' + Sapphire.isChainValid());                      //when this is done we can see that this breaks the chain as the future hashes become 'unlinked to genesis'
+
+
+
+//tests
+//console.log('valid: ' + Sapphire.isChainValid());                      //validity response
+//console.log(JSON.stringify(Sapphire, null, 4));                         //prints block data
+
+//Sapphire.chain[1].data = {amount: 100};                                 //example of an attacker trying to overwrite block data, eg: send 100
+//console.log('valid: ' + Sapphire.isChainValid());                      //when this is done we can see that this breaks the chain as the future hashes become 'unlinked to genesis'
                                                                         //what if the attacker recalculates the hash of the block they have just changed?
-Sapphire.chain[1].hash = Sapphire.chain[1].calculateHash();
-console.log('valid?: ' + Sapphire.isChainValid());                      //still invalid - this is because tampering with one block breaks the relationship with its previous block
+//Sapphire.chain[1].hash = Sapphire.chain[1].calculateHash();
+//console.log('valid: ' + Sapphire.isChainValid());                      //still invalid - this is because tampering with one block breaks the relationship with its previous block
                                                                         //this is the beauty of blockchain - Immutability!
