@@ -5,5 +5,9 @@
 - `npm install --save crypto-js`
 ~~~
 ## Usage:
-- run using: `node main.js`
+1. run using: `node main.js`
+
+## Good Resource:
+~~~
+https://www.youtube.com/channel/UCnxrdFPXJMeHru_b4Q_vTPQ
 ~~~
