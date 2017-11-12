@@ -16,6 +16,7 @@ https://www.youtube.com/channel/UCnxrdFPXJMeHru_b4Q_vTPQ
 https://github.com/lhartikk/naivechain
 https://block0.org/
 https://github.com/flowchain/blockchain-starter-kit
+https://en.bitcoin.it/wiki/Scalability#Scalability_targets
 ~~~
 
 ## Ultimate Goal with this project:
