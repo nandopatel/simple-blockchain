@@ -31,7 +31,7 @@ class Blockchain{
         this.difficulty = 4             //this value is the number of 0's needed to mine a block aka sdifficulty
     }
     createGenesisBlock(){
-    return new Block(0, "15/11/2017", "Genesis block", "0");    //creates genesis block (index, timestamp, somedata, prevhash) (in genesis blocks' case it just hashes some random data eg:0)
+        return new Block(0, "15/11/2017", "Genesis block", "0");    //creates genesis block (index, timestamp, somedata, prevhash) (in genesis blocks' case it just hashes some random data eg:0)
     }
 
     getLatestBlock(){
